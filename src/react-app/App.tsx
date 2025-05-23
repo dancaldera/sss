@@ -50,13 +50,17 @@ function App() {
         setLoading(true);
         setError("");
 
-        // Encode the parameters to handle special characters
-        const encodedPepper = encodeURIComponent(pepper);
-        const encodedWord = encodeURIComponent(word);
-
-        const response = await fetch(
-          `/api/generate/${encodedPepper}/${encodedWord}`
-        );
+        // Use the new POST API endpoint with JSON payload
+        const response = await fetch('/api/generate', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            pepper,
+            word
+          })
+        });
 
         if (!response.ok) {
           throw new Error(`Error: ${response.statusText}`);
@@ -64,6 +68,10 @@ function App() {
 
         const data = await response.json();
         setPassword(data.password);
+        
+        // Optional: you could store the additional security info here if needed
+        // const { salt, iterations, hash, rawHash } = data;
+        // console.log('Security info:', { salt, iterations, hash, rawHash });
       } catch (err) {
         setError(err instanceof Error ? err.message : "An error occurred");
         console.error(err);
