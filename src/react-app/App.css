@@ -1,3 +1,6 @@
+/* Import Fonts for Hacker Aesthetic */
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&family=VT323&display=swap');
+
 /* Base styles - Light and Dark theme variables */
 :root {
   /* Common variables */
@@ -5,10 +8,10 @@
   --shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   
   /* Light theme (default) */
-  --primary: #646cff;
-  --primary-hover: #535bf2;
-  --secondary: #0ea5e9;
-  --secondary-hover: #0284c7;
+  --primary: #4b5563;
+  --primary-hover: #374151;
+  --secondary: #6b7280;
+  --secondary-hover: #4b5563;
   --background: #ffffff;
   --surface: #f9f9f9;
   --surface-alt: #f0f9ff;
@@ -23,10 +26,10 @@
 /* Dark theme */
 @media (prefers-color-scheme: dark) {
   :root {
-    --primary: #818cf8;
-    --primary-hover: #6366f1;
-    --secondary: #38bdf8;
-    --secondary-hover: #0ea5e9;
+    --primary: #64748b;
+    --primary-hover: #475569;
+    --secondary: #334155;
+    --secondary-hover: #1e293b;
     --background: #121212;
     --surface: #1e1e1e;
     --surface-alt: #1a2233;
@@ -46,7 +49,7 @@
 }
 
 body {
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family: 'Source Code Pro', monospace;
   line-height: 1.5;
   color: var(--text);
   background-color: var(--background);
@@ -58,7 +61,16 @@ body {
   margin: 0 auto;
   padding: 1.5rem;
   text-align: center;
+}
+
+h1 {
+  font-family: 'VT323', monospace;
   color: var(--text);
+  font-size: 2.5rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 0 5px rgba(100, 108, 255, 0.5);
 }
 
 /* Logo section */
@@ -110,6 +122,13 @@ input {
   transition: all 0.2s ease;
   background-color: var(--background);
   color: var(--text);
+  font-family: 'Source Code Pro', monospace;
+  border-left: 3px solid var(--primary);
+}
+
+input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.6;
 }
 
 input:focus {
@@ -128,6 +147,27 @@ button {
   cursor: pointer;
   transition: all 0.2s;
   box-shadow: var(--shadow);
+  font-family: 'VT323', monospace;
+  letter-spacing: 1px;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+}
+
+button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: 0.5s;
+}
+
+button:hover::after {
+  left: 100%;
 }
 
 button:hover {
@@ -142,10 +182,31 @@ button:disabled {
 .copy-button {
   background-color: var(--secondary);
   margin-top: 0.5rem;
+  position: relative;
+  transition: all 0.3s ease;
+  border-left: 3px solid transparent;
 }
 
 .copy-button:hover {
   background-color: var(--secondary-hover);
+  transform: translateY(-2px);
+}
+
+.copy-button:active {
+  transform: translateY(1px);
+}
+
+/* Animation when copied */
+.copy-button.copied {
+  background-color: #00ff41;
+  animation: pulse 1.5s ease;
+  border-left: 3px solid #059669;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
 }
 
 /* Status elements */
@@ -169,17 +230,24 @@ button:disabled {
   margin-right: auto;
   animation: fadeIn 0.3s ease-in-out;
   box-shadow: var(--shadow);
+  border-left: 4px solid #00ff41;
+  border-top: 1px solid rgba(0, 255, 65, 0.3);
+  position: relative;
 }
 
 .password-value {
-  font-family: monospace;
-  font-size: 1.2rem;
+  font-family: 'VT323', monospace;
+  font-size: 1.5rem;
   padding: 0.8rem;
   margin: 0.8rem 0;
   background-color: var(--background);
   border: 1px solid var(--border);
   border-radius: var(--border-radius);
   word-break: break-all;
+  letter-spacing: 1px;
+  color: #1bb541;
+  text-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
+  box-shadow: inset 0 0 10px rgba(0, 255, 65, 0.1);
 }
 
 /* Toast notification */

@@ -1,10 +1,10 @@
 // src/App.tsx
 
 import { useState, useEffect } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import cloudflareLogo from "./assets/Cloudflare_Logo.svg";
-import honoLogo from "./assets/hono.svg";
+// import reactLogo from "./assets/react.svg";
+// import viteLogo from "/vite.svg";
+// import cloudflareLogo from "./assets/Cloudflare_Logo.svg";
+// import honoLogo from "./assets/hono.svg";
 import "./App.css";
 
 function App() {
@@ -85,7 +85,7 @@ function App() {
       {toast.visible && (
         <div className="toast success">{toast.message}</div>
       )}
-      <h1>Secure Password Generator</h1>
+      <h1>Password Generator</h1>
 
       <div>
         <div className="input-group">
@@ -120,8 +120,24 @@ function App() {
             <div className="password-value">{password}</div>
             <button
               onClick={() => {
+                // Copy to clipboard
                 navigator.clipboard.writeText(password);
-                setToast({ visible: true, message: "Password copied to clipboard!" });
+                
+                // Show toast notification
+                setToast({ visible: true, message: "Password copied!" });
+                
+                // Add a class to the button for visual feedback
+                const button = document.querySelector('.copy-button') as HTMLElement;
+                if (button) {
+                  button.classList.add('copied');
+                  button.innerText = 'Copied!';
+                  
+                  // Reset button after animation
+                  setTimeout(() => {
+                    button.classList.remove('copied');
+                    button.innerText = 'Copy to Clipboard';
+                  }, 1500);
+                }
                 
                 // Automatically hide the toast after 3 seconds
                 setTimeout(() => {
@@ -136,7 +152,7 @@ function App() {
         )}
       </div>
 
-      <footer className="logos">
+      {/* <footer className="logos">
         <a href="https://vite.dev" target="_blank" rel="noreferrer">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
@@ -153,7 +169,7 @@ function App() {
         >
           <img src={cloudflareLogo} className="logo" alt="Cloudflare logo" />
         </a>
-      </footer>
+      </footer> */}
     </div>
   );
 }
